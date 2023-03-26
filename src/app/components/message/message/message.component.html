@@ -1,3 +1,8 @@
-{{ message.role | userName }}: {{ message.content }}
-<br>
-<br>
+<div class="message-container">
+  <div class="label" [ngClass]="messageType!">
+    {{ message.role | userName }}
+  </div>
+  <div class="message" [ngClass]="messageType!">
+    {{ message.content }}
+  </div>
+</div>

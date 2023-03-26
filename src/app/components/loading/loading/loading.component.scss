@@ -1,0 +1,14 @@
+.loading-image {
+  display: flex;
+  justify-content: center;
+  width:100%;
+  img {
+    width: 20%
+  };
+  
+  animation: fadeIn 1s infinite alternate;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+}

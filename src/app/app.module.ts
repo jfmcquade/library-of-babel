@@ -9,13 +9,15 @@ import { TextFieldModule } from '@angular/cdk/text-field'
 import { FormsModule } from '@angular/forms';
 import { UserNamePipe } from './pipes/user-name.pipe';
 import { MessageComponent } from './components/message/message/message.component';
+import { LoadingComponent } from './components/loading/loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
     UserNamePipe,
-    MessageComponent
+    MessageComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

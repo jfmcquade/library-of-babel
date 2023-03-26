@@ -8,10 +8,12 @@ import { ChatCompletionRequestMessage, ChatCompletionResponseMessage } from 'ope
 })
 export class MessageComponent implements OnInit {
   @Input() message!: ChatCompletionRequestMessage | ChatCompletionResponseMessage
+  messageType: "user" | "assistant" | "system" | undefined
 
   constructor() { }
 
   ngOnInit(): void {
+    this.messageType = this.message.role
   }
 
 }

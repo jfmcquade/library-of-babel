@@ -1,16 +1,29 @@
-<div *ngFor="let message of messages">
-  <div *ngIf="message.role !== 'system'">
-    <app-message [message]="message"></app-message>
+<div class="chat-page">
+  <div class="chat-container">
+    <div #messagesContainer class="messages-container">
+      <div class="messages">
+        <ng-container *ngFor="let message of messages">
+          <ng-container *ngIf="message.role !== 'system'">
+            <app-message [message]="message"></app-message>
+          </ng-container>
+        </ng-container>
+      </div>
+  
+      <div *ngIf="loading">
+        <app-loading></app-loading>
+      </div>
+    </div>
+  
+    <div class="input-container">
+      <form (submit)="submit(message)">
+        <input
+          matInput
+          [(ngModel)]="message"
+          name="message"
+          placeholder="Type something..."
+        />
+        <button type="submit">Send</button>
+      </form>
+    </div>
   </div>
 </div>
-
-<div *ngIf="loading" class="loading-image">
-  <img src="../../../assets/witty-blackboard.jpg">
-</div>
-
-<form (submit)="submit(message)">
-    <label>Your message</label>
-    <input matInput [(ngModel)]="message" name="message">
-
-  <button type="submit">Submit</button>
-</form> 

@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChatCompletionRequestMessage, ChatCompletionResponseMessage } from 'openai';
-import { ChatService } from 'src/app/services/chat/chat.service';
 import { systemPrompt } from 'src/app/config';
+import { ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
+  @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   message: string | undefined
   messages: (ChatCompletionRequestMessage | ChatCompletionResponseMessage)[]
   loading: boolean = false
@@ -19,8 +20,7 @@ export class ChatComponent implements OnInit {
     ]
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   async submit(message: string | undefined) {
     if (!message) return
@@ -36,11 +36,9 @@ export class ChatComponent implements OnInit {
     try {
       this.loading = true
       const { data: { message: chatGPTMessage }, error } = await this.chatService.getChatCompletion(messages)
-  
       if (error) {
         throw error
       }
-  
       if (chatGPTMessage) {
         this.messages = [
           ...this.messages,
@@ -54,5 +52,15 @@ export class ChatComponent implements OnInit {
     } finally {
       this.loading = false
     }
+  }
+
+  ngAfterViewChecked(): void {
+    this.scrollToBottom()
+  }
+
+  scrollToBottom() {
+    try {
+      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+    } catch (err) { console.error(err) }
   }
 }
