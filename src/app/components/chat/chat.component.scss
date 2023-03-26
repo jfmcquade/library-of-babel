@@ -5,6 +5,7 @@
   .chat-container {
     font-family: Georgia, "Times New Roman", Times, serif;
     max-width: 750px;
+    width: 100%;
 
     .messages-container {
       margin: 1rem;
@@ -27,13 +28,17 @@
       padding: 1rem;
       display: flex;
       justify-content: center;
-
+      
       form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
         input {
           min-height: 30px;
-          min-width: 600px;
+          width: 70%;
           font-size: large;
         }
+
         button {
           font-size: large;
           font-family: Georgia, "Times New Roman", Times, serif;
