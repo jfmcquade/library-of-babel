@@ -1,0 +1,16 @@
+<div *ngFor="let message of messages">
+  <div *ngIf="message.role !== 'system'">
+    <app-message [message]="message"></app-message>
+  </div>
+</div>
+
+<div *ngIf="loading" class="loading-image">
+  <img src="../../../assets/witty-blackboard.jpg">
+</div>
+
+<form (submit)="submit(message)">
+    <label>Your message</label>
+    <input matInput [(ngModel)]="message" name="message">
+
+  <button type="submit">Submit</button>
+</form> 
