@@ -1,6 +1,6 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChatCompletionRequestMessage, ChatCompletionResponseMessage } from 'openai';
-import { systemPrompt } from 'src/app/config';
+import { SYSTEM_PROMPT, AVAILABLE_MODELS, IModel } from 'src/app/config';
 import { ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({
@@ -13,10 +13,12 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   message: string | undefined
   messages: (ChatCompletionRequestMessage | ChatCompletionResponseMessage)[]
   loading: boolean = false
+  availableModels = AVAILABLE_MODELS
+  selectedModel = this.availableModels[0]
 
   constructor(private chatService: ChatService) {
     this.messages = [
-      { role: "system", content: systemPrompt }
+      { role: "system", content: SYSTEM_PROMPT }
     ]
   }
 
@@ -29,13 +31,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       { role: "user", content: message }
     ]
     this.message = ""
-    await this.getResponse(this.messages)
+    await this.getResponse(this.messages, this.selectedModel.name)
   }
 
-  async getResponse(messages: ChatCompletionRequestMessage[]) {
+  async getResponse(messages: ChatCompletionRequestMessage[], model?: string) {
     try {
       this.loading = true
-      const { data: { message: chatGPTMessage }, error } = await this.chatService.getChatCompletion(messages)
+      const { data: { message: chatGPTMessage }, error } = await this.chatService.getChatCompletion(messages, model)
       if (error) {
         throw error
       }

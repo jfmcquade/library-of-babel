@@ -14,16 +14,23 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
+const AVAILABLE_MODELS = ["gpt-4", "gpt-3.5-turbo"]
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
 
   try {
-    const { messages } = await req.json()
+    const { messages, model } = await req.json()
+
+    let selectedModel = "gpt-3.5-turbo"
+    if (model && AVAILABLE_MODELS.includes(model)) {
+      selectedModel = model
+    }
 
     const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
+      model: selectedModel,
       messages,
     });
 

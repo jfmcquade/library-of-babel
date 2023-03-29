@@ -13,9 +13,9 @@ export class ChatService {
     this.supabase = createClient(environment.supabase.url, environment.supabase.apiKey)
   }
 
-  async getChatCompletion(messages: ChatCompletionRequestMessage[]) {
+  async getChatCompletion(messages: ChatCompletionRequestMessage[], model?: string) {
     const { data, error } = await this.supabase.functions.invoke("get-chat-completion", {
-      body: { messages }
+      body: { messages, model }
     })
     return { data, error }
   }

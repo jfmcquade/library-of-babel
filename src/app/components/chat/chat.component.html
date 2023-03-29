@@ -8,12 +8,12 @@
           </ng-container>
         </ng-container>
       </div>
-  
+
       <div *ngIf="loading">
         <app-loading></app-loading>
       </div>
     </div>
-  
+
     <div class="input-container">
       <form (submit)="submit(message)">
         <input
@@ -24,6 +24,14 @@
         />
         <button type="submit">Send</button>
       </form>
+      <div class="choose-model">
+        <label for="cars">Language model: </label>
+        <select [(ngModel)]="selectedModel">
+          <option *ngFor="let model of availableModels" [ngValue]="model">
+            {{ model.name }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
 </div>
