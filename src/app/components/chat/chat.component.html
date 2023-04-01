@@ -1,6 +1,6 @@
 <div class="chat-page">
   <div class="chat-container">
-    <div #messagesContainer class="messages-container">
+    <div #messagesContainer class="messages-container" (domChange)="onDomChange()">
       <div class="messages">
         <ng-container *ngFor="let message of messages">
           <ng-container *ngIf="message.role !== 'system'">
@@ -28,7 +28,7 @@
         <label for="cars">Language model: </label>
         <select [(ngModel)]="selectedModel">
           <option *ngFor="let model of availableModels" [ngValue]="model">
-            {{ model.name }}
+            {{ model.name }} – {{ model.description }}
           </option>
         </select>
       </div>

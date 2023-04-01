@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { UserNamePipe } from './pipes/user-name.pipe';
 import { MessageComponent } from './components/message/message/message.component';
 import { LoadingComponent } from './components/loading/loading/loading.component';
+import { DomChangeDirective } from './directives/dom-change.directive';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LoadingComponent } from './components/loading/loading/loading.component
     ChatComponent,
     UserNamePipe,
     MessageComponent,
-    LoadingComponent
+    LoadingComponent,
+    DomChangeDirective
   ],
   imports: [
     BrowserModule,

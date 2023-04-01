@@ -2,5 +2,5 @@ export const SYSTEM_PROMPT = "You are the philosopher Ludwig Wittgenstein. You w
 
 export const ASSISTANT_NAME = "wittGenPsTein"
 
-export type IModel = {name: string, description?: string, model: string}
-export const AVAILABLE_MODELS: IModel[] = [{ name: "gpt-4", description: "Slower, better results", model: "gpt-4" }, { name: "gpt-3.5", model: "gpt-3.5-turbo" }]
+export type IModel = {name: string, model: string, description?: string}
+export const AVAILABLE_MODELS: IModel[] = [{ name: "gpt-4", model: "gpt-4", description: "Slower, better responses" }, { name: "gpt-3.5", model: "gpt-3.5-turbo", description: "Faster, simpler responses" }]

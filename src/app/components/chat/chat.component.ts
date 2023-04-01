@@ -1,6 +1,6 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChatCompletionRequestMessage, ChatCompletionResponseMessage } from 'openai';
-import { SYSTEM_PROMPT, AVAILABLE_MODELS, IModel } from 'src/app/config';
+import { SYSTEM_PROMPT, AVAILABLE_MODELS } from 'src/app/config';
 import { ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ChatService } from 'src/app/services/chat/chat.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewChecked {
+export class ChatComponent implements OnInit {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   message: string | undefined
   messages: (ChatCompletionRequestMessage | ChatCompletionResponseMessage)[]
@@ -56,7 +56,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  ngAfterViewChecked(): void {
+  onDomChange() {
     this.scrollToBottom()
   }
 
