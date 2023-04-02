@@ -4,16 +4,16 @@
 
 import "https://deno.land/x/xhr@0.3.0/mod.ts"
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.13.1"
 import { corsHeaders } from '../_shared/cors.ts'
 import { Configuration, OpenAIApi } from "https://esm.sh/openai@3.2.1"
 
 console.log("Hello from Functions!")
 
-const configuration = new Configuration({
+const openAIConfiguration = new Configuration({
   apiKey: Deno.env.get("OPENAI_API_KEY"),
 });
-const openai = new OpenAIApi(configuration);
-
+const openai = new OpenAIApi(openAIConfiguration);
 const AVAILABLE_MODELS = ["gpt-4", "gpt-3.5-turbo"]
 
 serve(async (req) => {
@@ -24,17 +24,26 @@ serve(async (req) => {
   try {
     const { messages, model } = await req.json()
 
+    // get chat completion
     let selectedModel = "gpt-3.5-turbo"
     if (model && AVAILABLE_MODELS.includes(model)) {
       selectedModel = model
     }
-
     const completion = await openai.createChatCompletion({
       model: selectedModel,
       messages,
     });
-
     const { data: { choices: [{ message }] } } = completion
+
+
+    // store message string in database
+    const supabaseClient = createClient(
+      Deno.env.get('SB_URL') ?? 'SUPABASE_URL' ?? '',
+      Deno.env.get('SB_SERVICE_KEY') ?? 'SUPABASE_SERVICE_ROLE_KEY' ?? '',
+    )
+    const { error } = await supabaseClient.from("chats").insert({ messages: [...messages, message] })
+    if (error) throw error
+
 
     return new Response(JSON.stringify({ message }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
