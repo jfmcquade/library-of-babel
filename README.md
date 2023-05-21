@@ -1,3 +1,3 @@
-# WittgensteinGPT
+# Library of Bable
 
-An app to chat with Wittgenstein, powered by GPT.
+An app to chat with The Library of Babel.

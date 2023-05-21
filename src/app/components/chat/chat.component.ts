@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChatCompletionRequestMessage, ChatCompletionResponseMessage } from 'openai';
-import { SYSTEM_PROMPT, AVAILABLE_MODELS } from 'src/app/config';
+import { SYSTEM_PROMPT } from 'src/app/config';
 import { ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({
@@ -13,8 +13,6 @@ export class ChatComponent implements OnInit {
   message: string | undefined
   messages: (ChatCompletionRequestMessage | ChatCompletionResponseMessage)[]
   loading: boolean = false
-  availableModels = AVAILABLE_MODELS
-  selectedModel = this.availableModels[0]
 
   constructor(private chatService: ChatService) {
     this.messages = [
@@ -31,32 +29,24 @@ export class ChatComponent implements OnInit {
       { role: "user", content: message }
     ]
     this.message = ""
-    await this.getResponse(this.messages, this.selectedModel.name)
+    this.getResponse(this.messages)
   }
 
-  async getResponse(messages: ChatCompletionRequestMessage[], model?: string) {
-    try {
-      this.loading = true
-      const { data: { message: chatGPTMessage }, error } = await this.chatService.getChatCompletion(messages, model)
-      if (error) {
-        throw error
-      }
-      if (chatGPTMessage) {
-        this.messages = [
-          ...this.messages,
-          chatGPTMessage
-        ]
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message)
-      }
-    } finally {
+  getResponse(messages: ChatCompletionRequestMessage[], model?: string) {
+    this.loading = true
+    setTimeout(() => {
+      const message = this.chatService.getChatCompletion(messages)
+      this.messages = [
+        ...this.messages,
+        message
+      ];
       this.loading = false
-    }
+    }, 3000)
+
   }
 
   onDomChange() {
+    console.log("hi")
     setTimeout(() => this.scrollToBottom(), 100)
   }
 

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { ChatCompletionRequestMessage } from 'openai';
 import { environment } from 'src/environments/environment';
 
@@ -7,16 +6,17 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ChatService {
-  supabase: SupabaseClient;
 
-  constructor() {
-    this.supabase = createClient(environment.supabase.url, environment.supabase.apiKey)
+  getChatCompletion(messages: ChatCompletionRequestMessage[]): ChatCompletionRequestMessage {
+    return {role: "assistant", content: this.generateMessage()}
   }
 
-  async getChatCompletion(messages: ChatCompletionRequestMessage[], model?: string) {
-    const { data, error } = await this.supabase.functions.invoke("get-chat-completion", {
-      body: { messages, model }
-    })
-    return { data, error }
+  private generateMessage(length = 3200) {
+    let message = ""
+    const chars = "abcdefghijklmnopqrstuvwxyz., "
+    for (let i = 0; i <= length; i++) {
+      message += chars.charAt(Math.floor(Math.random() * chars.length))
+    }
+    return message
   }
 }
