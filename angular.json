@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wittgenstein-gpt": {
+    "library-of-babel": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/wittgenstein-gpt",
+            "outputPath": "dist/library-of-babel",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "wittgenstein-gpt:build:production"
+              "browserTarget": "library-of-babel:build:production"
             },
             "development": {
-              "browserTarget": "wittgenstein-gpt:build:development"
+              "browserTarget": "library-of-babel:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wittgenstein-gpt:build"
+            "browserTarget": "library-of-babel:build"
           }
         },
         "test": {
@@ -108,5 +108,5 @@
       }
     }
   },
-  "defaultProject": "wittgenstein-gpt"
+  "defaultProject": "library-of-babel"
 }
