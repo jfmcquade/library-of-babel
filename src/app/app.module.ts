@@ -11,6 +11,7 @@ import { UserNamePipe } from './pipes/user-name.pipe';
 import { MessageComponent } from './components/message/message/message.component';
 import { LoadingComponent } from './components/loading/loading/loading.component';
 import { DomChangeDirective } from './directives/dom-change.directive';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DomChangeDirective } from './directives/dom-change.directive';
     UserNamePipe,
     MessageComponent,
     LoadingComponent,
-    DomChangeDirective
+    DomChangeDirective,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
