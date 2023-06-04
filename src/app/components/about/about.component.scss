@@ -1,0 +1,25 @@
+.about-page {
+  display: flex;
+  justify-content: center;
+  .container {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    max-width: 750px;
+    width: 100%;
+    font-size: large;
+    line-height: 120%;
+    margin: 5rem 1rem;
+  }
+  .quote {
+    font-style: italic;
+    margin-left: 2rem;
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    button {
+      font-size: large;
+      font-family: Georgia, "Times New Roman", Times, serif;
+      margin-left: 0.5rem;
+    }
+  }
+}
