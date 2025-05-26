@@ -11,7 +11,7 @@ export class ChatService {
     return {role: "assistant", content: this.generateMessage()}
   }
 
-  private generateMessage(length = 3200) {
+  private generateMessage(length = 1400) {
     let message = ""
     const chars = "abcdefghijklmnopqrstuvwxyz., "
     for (let i = 0; i <= length; i++) {

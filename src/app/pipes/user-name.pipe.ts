@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ASSISTANT_NAME } from '../config';
 
 @Pipe({
-  name: 'userName'
+    name: 'userName',
+    standalone: false
 })
 export class UserNamePipe implements PipeTransform {
 

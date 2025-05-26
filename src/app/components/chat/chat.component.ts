@@ -4,9 +4,10 @@ import { SYSTEM_PROMPT } from 'src/app/config';
 import { ChatService } from 'src/app/services/chat/chat.service';
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+    selector: 'app-chat',
+    templateUrl: './chat.component.html',
+    styleUrls: ['./chat.component.scss'],
+    standalone: false
 })
 export class ChatComponent implements OnInit {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
@@ -46,7 +47,6 @@ export class ChatComponent implements OnInit {
   }
 
   onDomChange() {
-    console.log("hi")
     setTimeout(() => this.scrollToBottom(), 100)
   }
 
