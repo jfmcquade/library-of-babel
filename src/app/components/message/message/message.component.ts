@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ChatCompletionRequestMessage, ChatCompletionResponseMessage } from 'openai';
 import { TypingAnimationService } from 'src/app/services/typing-animation/typing-animation.service';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class MessageComponent implements OnInit, OnDestroy {
   @Input() message!: ChatCompletionRequestMessage | ChatCompletionResponseMessage;
+  @Output() contentChange = new EventEmitter<void>();
   messageType: "user" | "assistant" | "system" | undefined;
   displayedContent: string = '';
   private subscription: Subscription | undefined;
@@ -23,9 +24,11 @@ export class MessageComponent implements OnInit, OnDestroy {
       this.subscription = this.typingAnimationService.animateText(this.message.content)
         .subscribe(text => {
           this.displayedContent = text;
+          this.contentChange.emit();
         });
     } else {
       this.displayedContent = this.message.content || '';
+      this.contentChange.emit();
     }
   }
 
