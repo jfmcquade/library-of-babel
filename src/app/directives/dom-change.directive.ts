@@ -2,7 +2,8 @@ import { Directive, ElementRef, OnDestroy, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Directive({
-  selector: '[domChange]'
+    selector: '[domChange]',
+    standalone: false
 })
 export class DomChangeDirective implements OnDestroy {
   private changes: MutationObserver
