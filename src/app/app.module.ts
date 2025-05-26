@@ -12,6 +12,7 @@ import { MessageComponent } from './components/message/message/message.component
 import { LoadingComponent } from './components/loading/loading/loading.component';
 import { DomChangeDirective } from './directives/dom-change.directive';
 import { AboutComponent } from './components/about/about.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AboutComponent } from './components/about/about.component';
     MessageComponent,
     LoadingComponent,
     DomChangeDirective,
-    AboutComponent
+    AboutComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
