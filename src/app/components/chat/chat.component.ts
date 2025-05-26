@@ -47,7 +47,6 @@ export class ChatComponent implements OnInit {
   }
 
   onDomChange() {
-    console.log("hi")
     setTimeout(() => this.scrollToBottom(), 100)
   }
 
